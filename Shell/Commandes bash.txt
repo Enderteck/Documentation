@@ -1,0 +1,8 @@
+ls | lister les fichiers
+ls -l  | liste longue
+touch <nom> | creer un fichier
+mkdir <nom> | creer un dossier
+echo <nom> | lit un fichier
+rm | -d pour les dossiers | supprimer un truc
+
+
