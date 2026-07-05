@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rush01.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kleca <kleca@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ajouffre <ajouffre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 15:43:35 by ajouffre          #+#    #+#             */
-/*   Updated: 2026/07/05 15:33:30 by kleca            ###   ########.fr       */
+/*   Updated: 2026/07/05 15:54:05 by ajouffre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ void	ft_hline(int x, int s)
 	ft_putchar('\n');
 }
 
-void	ft_vline(int x)
+void	ft_vline(int x) // cette fonctione ecrit une ligne horizontale pour fomer les liges verticales du carre: |     | ou dans ce cas *    *
 {
 	int	i;
 
 	i = 2;
-	ft_putchar('*');
-	while (i < x)
+	ft_putchar('*'); // qund on utilise cette fonction c'est qu'on a besoin de cotes verticaux du carre, donc on dessine focement le premier caractere 
+	while (i < x) // on met des espaces jusqu'a atteindre la derniere colone
 	{
 		ft_putchar(' ');
 		i++;
 	}
-	if (i == x)
+	if (i == x) // si on est a la derniere colonne, on dessine le deuxieme '*'
 		ft_putchar('*');
-	ft_putchar('\n');
+	ft_putchar('\n'); // on ecrit le caractere de retour a la ligne pour gue la ligne suivant soit ecrite en dessous
 }
 
 // fonction pour construire le carre
