@@ -6,34 +6,27 @@
 /*   By: kleca <kleca@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 15:43:35 by ajouffre          #+#    #+#             */
-/*   Updated: 2026/07/05 15:57:51 by kleca            ###   ########.fr       */
+/*   Updated: 2026/07/05 16:14:42 by kleca            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_putchar(char c);
 
-// fonction  qui va afficher la premiere et derniere ligne horizontale du carre
-// la variable s donnee a cette fonction lui indique si c'est la premiere (0) ou derniere (1) ligne, qu'elle doit ecrire
-void	ft_hline(int x, int s)
+// fonction qui va afficher la premiere ligne horizontale du carre
+void	ft_firstline(int x)
 {
 	int	i;
 
 	i = 2;
-	if (s == 0) // si c'est la premiere ligne, on commence par afficher un '/'
-		ft_putchar('/');
-	else // sinon, c'est la derniere ligne et on affiche un '\'
-		ft_putchar('\\'); // il y a ici 2 '\' car en c, un seul '\' est utilise pour annuler la fonction du caractere precedent. s'il n'y avait qu'un slash, le code annulerait l'apostrophe suivant et le code ne fonctionnerait pas
+	ft_putchar('/'); // on commence par afficher un '/'
 	while (i < x) // cette boucle remplit le reste de la ligne (sauf le dernier caractere) par des *
 	{
 		ft_putchar('*');
 		i++;
 	}
-	if (i == x) // une fois arrive a la derniere ligne, on affiche:
+	if (i == x) // une fois arrives au dernier caractere, on affiche '\'
 	{
-		if (s == 0)
-			ft_putchar('\\'); // soit '\' si c'est la premiere ligne
-		else
-			ft_putchar('/'); // soit '/' si c'est la derniere ligne
+		ft_putchar('\\'); // il y a ici 2 '\' car en c, un seul '\' est utilise pour annuler la fonction du caractere precedent. s'il n'y avait qu'un slash, le code annulerait l'apostrophe suivant et le code ne fonctionnerait pas
 	}
 	ft_putchar('\n'); // il faut faire un retour a la ligne a la fin de la ligne affichee
 }
@@ -53,6 +46,26 @@ void	ft_vline(int x) // cette fonctione ecrit une ligne horizontale pour fomer l
 		ft_putchar('*');
 	ft_putchar('\n'); // on ecrit le caractere de retour a la ligne pour gue la ligne suivant soit ecrite en dessous
 }
+
+// fonction qui affiche la derniere ligne horizontale du carre
+void	ft_lastline(int x)
+{
+	int	i;
+
+	i = 2;
+	ft_putchar('\\'); // on commence par afficher un '\'
+	while (i < x) // cette boucle remplit le reste de la ligne (sauf le dernier caractere) par des *
+	{
+		ft_putchar('*');
+		i++;
+	}
+	if (i == x) // une fois arrives au dernier caractere, on affiche '/'
+	{
+		ft_putchar('/');
+	}
+	ft_putchar('\n'); // il faut faire un retour a la ligne a la fin de la ligne affichee
+}
+
 
 // fonction pour construire le carre
 void	rush(int x, int y)
