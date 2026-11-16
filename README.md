@@ -1,2 +1,3 @@
 # Documentation
-Documentation des commandes apprises durant ma piscine à l'école 42
+
+Documentation de tout mon savoir appris en programmation
