@@ -33,7 +33,7 @@ Peut représenter des nombres de  0 à 255
 
 Fonctionnement:
 
-Le premier bit (le plus à gauche) est égal à -128 et pas 128, pour représenter les nombres négatifs
+Le premier bit (le plus à gauche) est égal à 128
 Exemples en mémoire (bits), en ordre croissant:
 
 ```
@@ -79,11 +79,11 @@ Définition:
 
 Stocke un nombre entier
 Prends 4 octet (32 bits) de place dans la mémoire
-Peut représenter des nombres de -2147483648 à 2147483647
+Peut représenter des nombres de 0 à 4294967295
 
 Fonctionnement:
 
-Le premier bit (le plus à gauche) est égal à -2147483648 et pas 2147483647 cela sert à représenter les nombres négatifs
+Le premier bit (le plus à gauche) est égal à 2147483648
 Exemples en mémoire (bits), en ordre croissant:
 
 ```
