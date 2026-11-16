@@ -1,7 +1,5 @@
 # La mémoire en C
 
-
-
 ## Organisation de la mémoire d'un programme
 
 #### Définition:
@@ -10,31 +8,11 @@ Quand un programme est lancé, le système d'exploitation lui donne un espace m�
 
 #### Fonctionnement:
 
-```
-┏——————————————————————————┳————————┳——————————————————————————————————┓
-┃ Stack                    ┃        ┃ Heap                             ┃
-┃                          ┃        ┃                                  ┃
-┃ Variables locales,       ┃        ┃ est alloué avec malloc & co,     ┃
-┃ grandit vers le bas      ┃        ┃  grandit vers le haut            ┃
-┃                          ┃        ┃                                  ┃
-┣——————————————————————————┫        ┣——————————————————————————————————┫
-┃ Exemples d'initalisation ┃        ┃ Exemples d'initalisation         ┃
-┣——————————————————————————┫        ┣——————————————————————————————————┫
-┃                          ┃        ┃                                  ┃
-┃ int i                    ┃ espace ┃ pointeur = malloc(taille)        ┃
-┃ int number               ┃ libre  ┃ ptr2 = realloc(pointeur, taille) ┃
-┃ char *str                ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┃                          ┃        ┃                                  ┃
-┗——————————————————————————┻————————┻——————————————————————————————————┛
-```
-
-
+| Mémoire Stack (Pile) | | Mémoire Heap (Tas) |
+| ---------------------| :-: | --------------------- |
+| Pour les variables locales, grandit vers le bas | Espace <br> Libre | Est alloué avec malloc & co, grandit vers le haut |
+| Exemples d'initalisation:
+| int number <br> char lettre <br> char \*str <br> int tableau[] <br> char string[20] | | pointeur = malloc(taille) <br> ptr2 = realloc(pointeur, taille) <br> int \*tableau = malloc(taille) |
 
 ## Stack (la pile)
 
@@ -43,7 +21,7 @@ Quand un programme est lancé, le système d'exploitation lui donne un espace m�
 C'est la zone mémoire où sont stockées les variables crées dans les fonctions, les arguments et l'adresse de retour de chaque fonction.
 Elle est gérée automatiquement par le compilateur (gcc), rapide, mais de taille limitée (entre 1Mo-8Mo, souvent 8 sur Linux). Elle ne permet donc pas de stocker beacoup de donées, et il n'y est pas possible de changer la taille allouée des variable qui y sont stockées
 
-####  Fonctionnement technique:
+#### Fonctionnement technique:
 
 Chaque appel de fonction crée un "frame" (cadre en français) au sommet de la pile, il est détruit quand la fonction return.
 Le stack se vide dans un sens particulier, la dernière fonction appelée et ses varibales sont les premières à être libérées.
@@ -69,8 +47,6 @@ int main(void)
 /* Frame détruit, les variables et tableaux a et s cessent d'exister */
 ```
 
-
-
 ## Heap (le tas)
 
 #### Définition:
@@ -78,13 +54,14 @@ int main(void)
 C'est la zone de mémoire allouée manuellement par le dev avec malloc, calloc, realloc et libérée avec free grâce à al librairie <stdlib.h>.
 Ce type de mémoire est beaucoup plus grande que la stack (la limite est la RAM disponible de l'ordinateur) mais un peu plus lente d'accès.
 
-
 ### Fonctionnement technique:
 
-La fonciton malloc(n) réserve n octets libres (non initalisés par un autre malloc/programme) et renvoie l'adresse du premier,
-ou NULL en cas d'échec (pas de place, erreur de la librairie de malloc, bug, etc...).
-La mémoire reste réservée jusqu'au free, même après la fin de la fonction qui l'a créée.
-Oublier de faire un free créé fuite mémoire (memory leak), et au contraire, la libérer deux fois cause un double free
+La fonciton `malloc(nombre_d'octets)` réserve `n` octets libres (non initalisés par un autre malloc/programme) et renvoie l'adresse du premier.
+Il renvoie NULL en cas d'échec (pas de place, erreur de la librairie de malloc, bug, etc...).
+
+La mémoire reste réservée jusqu'au `free`, même après la fin de la fonction qui l'a créée.
+
+Oublier de faire un `free` créé fuite mémoire (memory leak), et au contraire, la libérer deux fois cause un double free
 
 #### Fonction exemple:
 
@@ -96,26 +73,42 @@ Oublier de faire un free créé fuite mémoire (memory leak), et au contraire, l
  */
 int main(void)
 {
-	int *p;
+	int *p;                       // Création d'un pointeur
 
-	p = malloc(sizeof(int) * 3);
-	if (p == NULL)
-		return (1);
-	p[0] = 1;
+	p = malloc(sizeof(int) * 3);  // Assignation d'une adresse réservée
+	if (p == NULL)                // Verification de l'assignation
+		return (1);               // Si échec, terminer le  programme et renvoyer 1
+                                  // (code de sortie induquant une erreur)
+	p[0] = 1;                     // Définition des valeurs des cases
 	p[1] = 2;
 	p[2] = 3;
-	free(p);
-	p = NULL;	/* Évite un use-after-free */
+	free(p);                      // Libération de la mémoire, en pointant l'adresse donnée par malloc"
+	p = NULL;	                  // Évite une utilisation après le free();
 	return (0);
 }
-
+```
 
 
 ## Écrire dans la Stack vs le Heap
 
-Les deux zones utilisent les mêmes opérateurs (`=`, `[]`, `.`, `->`, `*`), la différence est dans la création, la durée de vie et la libération
+Les deux zones utilisent les mêmes opérateurs:
 
-Les exemples utilisent la structure de `Structs & Typedef interaction.md`
+Définition valeur:
+
+| `=` | `+=`/`⩲` | `-=` | `*=` | `/=`
+| -- | -- | -- | -- | -- |
+| Redéfinit | Ajoute | Retire | Multiplie par | Divise par |
+
+Accès dans pointeurs:
+
+| `*` | `[]` |
+| -- | -- |
+| Déréférence (accède au contenu) | Accède à la case [i] |
+Accès dans structures:
+
+| `.` | `->` |
+
+la différence est dans la manière des les créer, leur durée de vie et leur libération.
 
 | Stack (statique/automatique) | Heap (dynamique) |
 | --- | --- |
