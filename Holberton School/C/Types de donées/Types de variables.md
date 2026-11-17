@@ -10,18 +10,18 @@ Peut représenter des nombres de  -128 à 127
 
 Fonctionnement:
 
-Le premier bit (le plus à gauche) est égal à -128 et pas 128, pour représenter les nombres négatifs
-Exemples en mémoire (bits), en ordre croissant:
+Le premier bit (le plus à gauche) est égal à -128 et pas 128, ce qui permaet aux char de représenter les nombres négatifs
 
-```
-Valeur:   -128  64 32  16   8   4   2   1
-			1   0   0   0   0   0   0   0		= -128 en décimal
-			1   0   0   0   0   0   0   1		= -127 en décimal
-			1   1   1   1   1   1   1   1		= -1 en décimal
-			0   0   0   0   0   0   0   0		= 0 en décimal
-			0   0   0   0   0   0   0   1		= 1 en décimal
-			0   1   1   1   1   1   1   1		= 127 en décimal
-```
+Représentation mémoire (bits), avec des exemples en ordre croissant:
+
+| -128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 | Valeur décimale |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | ---- |
+| 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | = -128 |
+| 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | = -127 |
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | = -1 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | = 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | = 1 |
+| 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | = 127 |
 
 ## Unsigned char:
 
@@ -36,15 +36,16 @@ Fonctionnement:
 Le premier bit (le plus à gauche) est égal à 128
 Exemples en mémoire (bits), en ordre croissant:
 
-```
-Valeur:    128  64 32  16   8   4   2   1
-			0   0   0   0   0   0   0   0		= 0
-			0   0   0   0   0   0   0   1		= 1
-			0   0   0   1   0   0   0   0		= 16
-			0   1   1   1   1   1   1   1		= 127
-			1   0   0   0   0   0   0   0		= 128
-			1   1   1   1   1   1   1   1		= 255
-```
+Représentation mémoire (bits), avec des exemples en ordre croissant:
+
+| 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 | Valeur décimale |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | ---- |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | = 0 |
+| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | = 1 |
+| 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | = 16 |
+| 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | = 127 |
+| 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | = 128 |
+| 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | = 255 |
 
 ## Int
 
